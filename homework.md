@@ -32,3 +32,4 @@ Episode-05
 - how express Js handle basically routes behind the scean
 - write a dummy midlleware for admin and user
 - write a dummy middleware for adminAuth for all user routes, except  /user/login
+- error handling use app.use("/", (err, req, res, next) = {});
