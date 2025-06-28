@@ -3,9 +3,22 @@ const express = require('express');
 const app = express();
 
 
-app.use("/user", (req, res) => {
-    res.send("HAHAHHAHAHA");
-})
+app.use("/user", (req, res, next) => {
+    console.log("handling the routes user!");
+    // res.send("routes handler 1");
+    next();
+},
+(req, res, next) => {
+    console.log("handling the routes user 2");
+    // res.send("routes handler 2");
+    next();
+}, 
+(req, res) => {
+    console.log("handling the routes 3");
+    res.send("routed handler 3")
+}
+)
+
 
 // This is only get the user call dor /user
 app.get("/user", (req, res) => {
