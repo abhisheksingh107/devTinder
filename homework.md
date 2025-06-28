@@ -18,3 +18,6 @@ Episode -04
 - create a remote repo on github
 - Push your all the code in remote repo
 - Play with routes and routes extension ex - /hello, / , /hello2 , /xyz
+- order of routes matter a lots
+- Install Postman and make a workspace and collection > test Api call
+- write a logic to handle get, post, delete, patch API calls and test them on postman

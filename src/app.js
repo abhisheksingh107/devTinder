@@ -2,30 +2,33 @@ const express = require('express');
 
 const app = express();
 
-// app.use("/", (req, res) => {
-//     res.send("Hello World");
-// })
 
-app.use("/", (req, res) => {
-    res.send("This is the main page");
+app.use("/user", (req, res) => {
+    res.send("HAHAHHAHAHA");
 })
 
-app.use("/hello", (req, res) => {
-    res.send("This in on hello page");
+// This is only get the user call dor /user
+app.get("/user", (req, res) => {
+    res.send({firstName: "Abhishek Singh", age: "15"});
 })
 
-// app.use("/", (req, res) => {
-//     res.send("This is the main page");
-// })
+app.post("/user", (req, res) => {
+    // saving data to DB
+    res.send("Data Successfullly saved to databases");
+})
+
+
+app.delete("/user", (req, res) => {
+    res.send("Deleting data from DB");
+})
+
+
 
 
 app.use("/test", (req,res) => {
     res.send("Hello  from test page");
 })
 
-app.use((req, res) => {
-    res.send("Hello from the server");
-})
 
 
 app.listen(3000, () => {
