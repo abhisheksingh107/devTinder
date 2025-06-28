@@ -21,3 +21,14 @@ Episode -04
 - order of routes matter a lots
 - Install Postman and make a workspace and collection > test Api call
 - write a logic to handle get, post, delete, patch API calls and test them on postman
+
+
+Episode-05
+- multiple routes handler -- play with the code
+- next()
+- next function error along with the res.send()
+- app.use("/user", rh, [rh1, rh2], rh3)
+- what is middleware? why do we need it?
+- how express Js handle basically routes behind the scean
+- write a dummy midlleware for admin and user
+- write a dummy middleware for adminAuth for all user routes, except  /user/login

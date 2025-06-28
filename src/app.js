@@ -2,6 +2,18 @@ const express = require('express');
 
 const app = express();
 
+const { adminAuth, userAuth } = require("./middleware/auth");
+
+app.use("/admin", adminAuth);
+
+app.get("/admin/getProfile", (req, res) => {
+    res.send("sending all admin data");
+})
+
+app.get("/user/getProfile", userAuth, (req, res) => {
+    res.send("Sending all user profile");
+})
+
 
 app.use("/user", (req, res, next) => {
     console.log("handling the routes user!");
@@ -20,6 +32,8 @@ app.use("/user", (req, res, next) => {
 )
 
 
+
+
 // This is only get the user call dor /user
 app.get("/user", (req, res) => {
     res.send({firstName: "Abhishek Singh", age: "15"});
@@ -34,8 +48,6 @@ app.post("/user", (req, res) => {
 app.delete("/user", (req, res) => {
     res.send("Deleting data from DB");
 })
-
-
 
 
 app.use("/test", (req,res) => {
