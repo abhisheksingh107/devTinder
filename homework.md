@@ -67,4 +67,7 @@ Episode -08
 - Add timestamp to the userSchema
 - Add API level validation on patch request and signUp post api
 - Add API validation on each field
+- install validation
+- explore validator and add validator for strong Password, email, PhotoURL
+
 
