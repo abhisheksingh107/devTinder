@@ -43,3 +43,28 @@ Episode -06
 - create a userSchema and user Model
 - create a POST /singup API to add data to database
 - push some documents using API calls from postman 
+
+
+Episode - 07
+- js object vs json
+- Add the express.json midlleware to your App
+- Make your signup API dynamic to receive data from end user
+- Users find with duplicate emaildId which object should be returned 
+- API- get users by email
+- API - Feed API, get feed get all the users from the database
+- API - create the delete API tp delete the user
+- Difference between patch and Put
+- API - update the user
+- Explore the mongoose documentation model model
+
+
+Episode -08
+- Explore the schematype option from the document
+- add required, unique, lowercase, minLength, maxLenght, trim 
+- add default
+- create a custom validate function for gender
+- Improve the DB schema, put all appropriate validations on each field in schema
+- Add timestamp to the userSchema
+- Add API level validation on patch request and signUp post api
+- Add API validation on each field
+
