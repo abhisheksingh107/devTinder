@@ -69,5 +69,11 @@ Episode -08
 - Add API validation on each field
 - install validation
 - explore validator and add validator for strong Password, email, PhotoURL
+- Never trust req.body
 
 
+Episode - 09
+- Validate data in SignUp API
+- Install bcrypt package 
+- creating Passwordhash using bcrpt.hash and save the user as excrupted password
+- 

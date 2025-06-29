@@ -1,22 +1,29 @@
 const express = require("express");
 const app = express();
 const connectDB = require("./config/database");
+const bcrypt = require("bcrypt");
 const User = require("./model/user");
+const { validateSignUpData } = require("./utils/validate");
 
 app.use(express.json());
 
 app.post("/signup", async (req, res) => {
-  const { emailId } = req.body;
-  const user = new User(req.body);
   try {
-    const userExist = await User.findOne({emailId : emailId});
-    if(userExist){
-      return res.status(400).send("User already exists");
-    }
+    // Validate the data
+    await validateSignUpData(req);
+    // encrypt the password
+    const { firstName, lastName, emailId, password } = req.body;
+    const passwordHash = await bcrypt.hash(password, 10);
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      password: passwordHash,
+    });
     await user.save();
     res.send("User Added Successfully");
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).send("Error : " + error.message);
   }
 });
 
@@ -90,10 +97,9 @@ app.patch("/user", async (req, res) => {
       throw new Error("Updates are not allowed");
     }
 
-    if(data?.skills.length > 10){
+    if (data?.skills.length > 10) {
       throw new Error("Skills can't be more than 10");
     }
-
 
     const user = await User.findByIdAndUpdate(
       userid,
