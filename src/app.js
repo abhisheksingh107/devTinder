@@ -3,7 +3,7 @@ const app = express();
 const connectDB = require("./config/database");
 const bcrypt = require("bcrypt");
 const User = require("./model/user");
-const { validateSignUpData } = require("./utils/validate");
+const { validateSignUpData, validateLoginUpData } = require("./utils/validate");
 
 app.use(express.json());
 
@@ -27,6 +27,26 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+app.post("/login", async (req, res) => {
+  try {
+    validateLoginUpData(req);
+    const { emailId, password } = req.body;
+    const user = await User.findOne({ emailId });
+    console.log(user);
+    console.log(user.password);
+    if (!user) {
+      return res.status(401).json({ message: "Invalid Credentials" });
+    }
+    const isPasswordvalid = await bcrypt.compare(password, user.password);
+    if (isPasswordvalid) {
+      res.send("Login Successfully");
+    } else {
+      return res.status(401).json({ message: "Invalid Credentials" });
+    }
+  } catch (error) {
+    res.status(500).send("Error : " + error.message);
+  }
+});
 //  Get /user API to get the user from the database
 
 app.get("/user", async (req, res) => {

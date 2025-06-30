@@ -43,4 +43,11 @@ const validateSignUpData = async (req) => {
   }
 };
 
-module.exports = { validateSignUpData };
+const validateLoginUpData = (req) => {
+  const { emailId } = req.body;
+  if (!emailId || !validator.isEmail(emailId)) {
+    throw new Error("Please enter a valid email address");
+  }
+};
+
+module.exports = { validateSignUpData, validateLoginUpData };
