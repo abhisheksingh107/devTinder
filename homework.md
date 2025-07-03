@@ -1,4 +1,4 @@
-Episode 03
+Episode - 03
 - create a repository
 - Initialize the repository 
 - node_modules, package.json, package-lock.json
@@ -12,7 +12,7 @@ Episode 03
 - Difference between carat and tilde(^ and ~)
 
 
-Episode -04
+Episode - 04
 - Initialize git
 - .gitIgnore
 - create a remote repo on github
@@ -23,7 +23,7 @@ Episode -04
 - write a logic to handle get, post, delete, patch API calls and test them on postman
 
 
-Episode-05
+Episode - 05
 - multiple routes handler -- play with the code
 - next()
 - next function error along with the res.send()
@@ -35,7 +35,7 @@ Episode-05
 - error handling use app.use("/", (err, req, res, next) = {});
 
 
-Episode -06
+Episode - 06
 - create a free cluster on mongoDb Website(Mongo Atlas)
 - Install mongoose library
 - connect your application to the database 
@@ -58,7 +58,7 @@ Episode - 07
 - Explore the mongoose documentation model model
 
 
-Episode -08
+Episode - 08
 - Explore the schematype option from the document
 - add required, unique, lowercase, minLength, maxLenght, trim 
 - add default
@@ -72,9 +72,21 @@ Episode -08
 - Never trust req.body
 
 
-Episode - 09
+Episode  - 09
 - Validate data in SignUp API
 - Install bcrypt package 
 - creating Passwordhash using bcrpt.hash and save the user as excrupted password
 - create login API
 - compare password and throw error if email and password is not valid
+
+
+Episode  - 10
+- install cookie-parser
+- just send a dummy cookie to user
+- create GET /profile API and check if you send the cookie back
+- install jsonwebtoken
+- In login API, after email and password validation, create a jwt token and send it to the user
+- Read the cookies inside your profile API and and find the loggedIn user
+- userAuth middleware
+- Add the userAuth middleware in profile API and a new SendConnectionRequest API
+- set the expire of JWT token and cookies to 1 d

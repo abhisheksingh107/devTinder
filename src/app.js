@@ -3,9 +3,13 @@ const app = express();
 const connectDB = require("./config/database");
 const bcrypt = require("bcrypt");
 const User = require("./model/user");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 const { validateSignUpData, validateLoginUpData } = require("./utils/validate");
+const { userAuth } = require("./middleware/auth");
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.post("/signup", async (req, res) => {
   try {
@@ -22,6 +26,7 @@ app.post("/signup", async (req, res) => {
     });
     await user.save();
     res.send("User Added Successfully");
+    console.log("user saved");
   } catch (error) {
     res.status(500).send("Error : " + error.message);
   }
@@ -32,13 +37,20 @@ app.post("/login", async (req, res) => {
     validateLoginUpData(req);
     const { emailId, password } = req.body;
     const user = await User.findOne({ emailId });
-    console.log(user);
-    console.log(user.password);
     if (!user) {
       return res.status(401).json({ message: "Invalid Credentials" });
     }
-    const isPasswordvalid = await bcrypt.compare(password, user.password);
+    const isPasswordvalid = await user.validatePassword(password);
     if (isPasswordvalid) {
+      const token = await user.getJWT(); //creating JWT token
+
+      // create a cookie and wrap the token inside cookie
+      res.cookie("token", token, {
+        maxAge: 24 * 60 * 60 * 1000, // Expire in 1-day
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+      });
       res.send("Login Successfully");
     } else {
       return res.status(401).json({ message: "Invalid Credentials" });
@@ -47,6 +59,25 @@ app.post("/login", async (req, res) => {
     res.status(500).send("Error : " + error.message);
   }
 });
+
+app.get("/profile", userAuth, async (req, res) => {
+  try {
+    const user = req.user;
+    res.send(user);
+  } catch (error) {
+    res.status(500).send("Error : " + error.message);
+  }
+});
+
+app.post("/SendConnectionRequest", userAuth, async (req, res) => {
+  try {
+    const user = req.user;
+    res.send(user.firstName + " is sending the connection request");
+  } catch (error) {
+    res.status(500).send("Error : " + error.message);
+  }
+});
+
 //  Get /user API to get the user from the database
 
 app.get("/user", async (req, res) => {
