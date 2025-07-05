@@ -89,4 +89,38 @@ Episode  - 10
 - Read the cookies inside your profile API and and find the loggedIn user
 - userAuth middleware
 - Add the userAuth middleware in profile API and a new SendConnectionRequest API
-- set the expire of JWT token and cookies to 1 d
+- set the expire of JWT token and cookies to 1d
+
+Episode - 11
+- Expolore the tinder APIs
+- create a list all API you can think of in Dev tinder
+- Group multiple routes under repective routes
+- Read documentation for express.Router
+- create routes folder for managing auth, profile, request, routers
+- Import these routers in app.js
+- create POST/ logout API 
+- create PATCH /profile/edit
+- create PATCH /profile/password API => forget password API
+- Make sure you validate all data in every POST, PATCH apis
+
+Episode - 12
+- create a connectionrequest schema
+- send ConnectionRequest APIs
+- proper Validation of schema
+- Think about all corner cases
+- $or query and $and query in mongoose
+- schema.pre("save") function
+- read about the indexex in MongoDB
+- Why do we need index in DB
+- what is advantange and disadvantage of indexex
+- ALWAYS Think about the corner cases
+
+Episode - 13
+-  Write a code with proper validation for post request/review/:status/: requestId
+- Thought process of GET and POST
+- Read about ref and papolate
+- create GET /user/request/received with all the checks
+
+Episode - 14
+- Logic for GET /feed API
+- Explore the $nin, $ne and other query operation

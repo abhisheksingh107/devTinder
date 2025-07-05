@@ -50,4 +50,46 @@ const validateLoginUpData = (req) => {
   }
 };
 
-module.exports = { validateSignUpData, validateLoginUpData };
+const validateEditData = (req) => {
+  const allowUpdates = [
+    "firstName",
+    "lastName",
+    "age",
+    "gender",
+    "skills",
+    "photoUrl",
+    "about",
+  ];
+  const isAllowedUpdate = Object.keys(req.body).every((fields) =>
+    allowUpdates.includes(fields)
+  );
+  return isAllowedUpdate;
+};
+
+const validatePasswordData = (req) => {
+  const { emailId, newPassword } = req.body;
+  if (!emailId || !newPassword) {
+    res.status(400).json({ message: "Email and newPassword are required. " });
+  }
+
+  if (
+    !validator.isStrongPassword(newPassword, {
+      minLength: 8,
+      minUppercase: 1,
+      minLowercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    })
+  ) {
+    throw new Error(
+      "New Password must be at least 8 characters with upper/lowercase letters, a number, and a symbol"
+    );
+  }
+};
+
+module.exports = {
+  validateSignUpData,
+  validateLoginUpData,
+  validateEditData,
+  validatePasswordData,
+};
