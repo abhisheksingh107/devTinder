@@ -5,7 +5,7 @@ const userAuth = async (req, res, next) => {
   try {
     const { token } = req.cookies;
     if (!token) {
-      return res.status(401).json({ message: "Authentication token missing" });
+      return res.status(401).json({ message: "Please login" });
     }
 
     // verify the token

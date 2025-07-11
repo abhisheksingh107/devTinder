@@ -68,6 +68,7 @@ const userSchema = new mongoose.Schema(
     },
     about: {
       type: String,
+      default: "I am software Engineer"
     },
   },
   {

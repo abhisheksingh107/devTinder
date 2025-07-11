@@ -15,7 +15,7 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
   }
 });
 
-profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
+profileRouter.post("/profile/edit", userAuth, async (req, res) => {
   try {
     if (!validateEditData(req)) {
       return res.status(400).json({ error: "Invalid update fields" });
@@ -31,6 +31,8 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
     res.status(500).send("Error : " + error.message);
   }
 });
+
+
 
 profileRouter.patch("/profile/forget-password", async (req, res) => {
   try {

@@ -20,7 +20,7 @@ authRouter.post("/signup", async (req, res) => {
       password: passwordHash,
     });
     await user.save();
-    res.send("User Added Successfully");
+    res.send(user);
     console.log("user saved");
   } catch (error) {
     res.status(500).send("Error : " + error.message);
@@ -44,9 +44,9 @@ authRouter.post("/login", async (req, res) => {
         maxAge: 24 * 60 * 60 * 1000, // Expire in 1-day
         httpOnly: true,
         secure: true,
-        sameSite: "Strict",
+        sameSite: "strict",
       });
-      res.send("Login Successfully");
+      res.send(user);
     } else {
       return res.status(401).json({ message: "Invalid Credentials" });
     }

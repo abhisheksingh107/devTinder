@@ -40,7 +40,7 @@ userRoutes.get("/request/connection", userAuth, async (req, res) => {
       .populate("toUserId", "firstName lastName age about photoUrl");
 
     // Only return the details of the other user in each connection
-    const filteredConnection = connectionRequest.map((connection) => {
+    const connections = connectionRequest.map((connection) => {
       if (
         connection.fromUserId._id.toString() === loggedInUser._id.toString()
       ) {
@@ -52,7 +52,7 @@ userRoutes.get("/request/connection", userAuth, async (req, res) => {
 
     res.status(200).json({
       message: "fecthing All connection",
-      filteredConnection,
+      connections,
     });
   } catch (error) {
     res.status(500).json({
@@ -85,7 +85,7 @@ userRoutes.get("/feed", userAuth, async (req, res) => {
         { _id: { $ne: loggedInUser._id } },
         { _id: { $nin: Array.from(hideUserFromFeed) } },
       ],
-    }).select("firstName lastName age about photoUrl").skip(skip).limit(limit);
+    }).select("firstName lastName age about skills photoUrl").skip(skip).limit(limit);
 
     res.send(users);
   } catch (error) {
