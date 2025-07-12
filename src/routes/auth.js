@@ -19,9 +19,17 @@ authRouter.post("/signup", async (req, res) => {
       emailId,
       password: passwordHash,
     });
-    await user.save();
+    const token = await user.getJWT(); //creating JWT token
+
+    // create a cookie and wrap the token inside cookie
+    res.cookie("token", token, {
+      maxAge: 24 * 60 * 60 * 1000, // Expire in 1-day
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
     res.send(user);
-    console.log("user saved");
+    await user.save();
   } catch (error) {
     res.status(500).send("Error : " + error.message);
   }
