@@ -10,7 +10,7 @@ const userRoutes = require("./routes/user");
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://44.215.110.23",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   })
