@@ -25,8 +25,8 @@ authRouter.post("/signup", async (req, res) => {
     res.cookie("token", token, {
       maxAge: 24 * 60 * 60 * 1000, // Expire in 1-day
       httpOnly: true,
-      secure: false,
-      sameSite: "LAX",
+      secure: true,
+      sameSite: "Strict",
     });
     res.send(user);
     await user.save();
@@ -51,8 +51,8 @@ authRouter.post("/login", async (req, res) => {
       res.cookie("token", token, {
         maxAge: 24 * 60 * 60 * 1000, // Expire in 1-day
         httpOnly: true,
-        secure: false,
-        sameSite: "LAX",
+        secure: true,
+        sameSite: "Strict",
       });
       res.send(user);
     } else {

@@ -7,15 +7,14 @@ const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/request");
 const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/user");
-
+require("dotenv").config();
 app.use(
   cors({
-    origin: "http://44.215.110.23",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
-
 
 app.use(express.json());
 app.use(cookieParser());
@@ -28,7 +27,7 @@ app.use("/", userRoutes);
 connectDB()
   .then(() => {
     console.log("connection is established...");
-    app.listen(7777, () => {
+    app.listen(process.env.PORT, () => {
       console.log("Server is listening on PORT 7777");
     });
   })
