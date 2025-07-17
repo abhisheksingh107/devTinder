@@ -43,7 +43,6 @@ profileRouter.patch("/profile/forget-password", async (req, res) => {
       res.status(400).json({ message: "User not found." });
     }
     user.password = await bcrypt.hash(newPassword, 10);
-    console.log(user.password);
     await user.save();
     res.send("Password has been updated");
   } catch (error) {
